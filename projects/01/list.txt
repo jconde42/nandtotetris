@@ -1,0 +1,13 @@
+list of completed gates
+
+Not
+And
+Or
+Xor
+Mux
+Dmux
+Not16
+And16
+Or16
+Mux16
+Or8Way
