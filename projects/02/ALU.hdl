@@ -67,5 +67,15 @@ CHIP ALU {
     // stage 3
     DMux16(in = preOut, sel= no, a= preOut2, b= preNO);
     Not16(in= preNO, out= postNO);
-    Mux16(a= preOut2, b= postNO, sel= no, out= out);
+    Mux16(a= preOut2, b= postNO, sel= no, out= out, out[0..7]= first, out[8..15]= second, out[15]= sign);
+
+    // status codes
+    // zr
+    Or8Way(in= first, out= OrOut1);
+    Or8Way(in= second, out= OrOut2);
+    Or(a= OrOut1, b= OrOut2, out= prezr);
+    Not(in= prezr, out= zr);
+
+    // ng
+    And(a= sign,b= sign, out= ng);
 }
