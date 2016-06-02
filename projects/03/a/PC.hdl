@@ -16,5 +16,11 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Register(in= rin, load= true, out= out, out= rout);
+    DMux16(in= rout, sel= inc, a= noInc, b= yesInc);
+    Inc16(in= yesInc, out= postInc);
+    Mux16(a= noInc, b= postInc, sel= inc, out= postDMux);
+    Mux16(a= postDMux, b= in, sel= load, out= MuxOut );
+    Mux16(a= MuxOut, b= false, sel= reset, out= rin);
+
 }
